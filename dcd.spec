@@ -14,6 +14,7 @@ BuildRequires:	automake
 BuildRequires:	libtool
 BuildRequires:	libwrap-devel
 PreReq:		rc-scripts
+PreReq:		sed >= 4.0
 Requires(post,preun):	/sbin/chkconfig
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -76,6 +77,7 @@ if [ -e /etc/dcd/console.users.rpmsave ]; then
 	cp /etc/dcd/dcd.users /etc/dcd/dcd.users.rpmnew
 	cp /etc/dcd/console.users.rpmsave /etc/dcd/dcd.users
 fi
+umask 002
 echo "Remember to review config - console users has been changed into dcd.users"
 cp /etc/dcd/dcd.conf /etc/dcd/dcd.conf.rpmsave
 sed -e s/console.users/dcd.users/g /etc/dcd/dcd.conf >/etc/dcd/dcd.conf.tmp
