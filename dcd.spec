@@ -1,7 +1,7 @@
 Summary:	DConnect Daemon - Hub D****ct Connect for Linux
 Summary(pl):	DConnect Daemon - Hub D****ct Connecta dla Linuksa
 Name:		dcd
-Version:	0.1.5
+Version:	0.1.6
 Release:	1
 License:	GPL v2
 Group:		Networking/Daemons
@@ -69,7 +69,7 @@ fi
 %files
 %defattr(644,root,root,755)
 %doc AUTHORS BUGS FAQ NEWS README TODO doc/*.txt doc/*.html
-%config(noreplace) %{_sysconfdir}/dcd/dcd.conf
+%config(noreplace) %{_sysconfdir}/dcd/*
 %config(noreplace) /etc/sysconfig/dcd
 %attr(755,root,root) %{_sbindir}/dcd
 %attr(754,root,root) /etc/rc.d/init.d/dcd
