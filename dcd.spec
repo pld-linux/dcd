@@ -1,5 +1,5 @@
 Summary:	DConnect Daemon - Hub D****ct Connect for Linux
-Summary(pl):	DConnect Daemon - Hub D****ct Connecta dla Linuxa
+Summary(pl):	DConnect Daemon - Hub D****ct Connecta dla Linuksa
 Name:		dcd
 Version:	0.0.2
 Release:	1
@@ -15,7 +15,7 @@ This is Linux D*** Connect Hub implementation for Linux. It works in
 daemon mode.
 
 %description -l pl
-Pakiet zawiera Linuxow± implementacjê huba D*** Connecta, który
+Pakiet zawiera Linuksow± implementacjê huba D*** Connecta, który
 pracuje jako demon.
 
 %prep
@@ -24,7 +24,7 @@ pracuje jako demon.
 %build
 %configure
 
-make
+%{__make}
 
 %install
 rm -rf $RPM_BUILD_ROOT
