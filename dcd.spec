@@ -26,7 +26,7 @@ pracuje jako demon i u¿ywa w±tków.
 
 %build
 rm -f missing
-libtoolize --copy --force
+%{__libtoolize}
 aclocal
 %{__autoconf}
 %{__automake}
