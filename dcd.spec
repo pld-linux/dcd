@@ -1,13 +1,13 @@
 Summary:	DConnect Daemon - Hub D****ct Connect for Linux
 Summary(pl):	DConnect Daemon - Hub D****ct Connecta dla Linuksa
 Name:		dcd
-Version:	0.4.8
-Release:	1
+Version:	0.5.0
+Release:	0.9
 License:	GPL v2
 Group:		Networking/Daemons
 Vendor:		DConnect Team <dc-hub@ds.pg.gda.pl>
-Source0:	ftp://pollux.ds.pg.gda.pl/pub/Linux/DConnect/sources/stable/%{name}-%{version}.tar.bz2
-# Source0-md5:	6219d776ce0ced149f74f28463b098f6
+Source0:	ftp://pollux.ds.pg.gda.pl/pub/Linux/DConnect/sources/devel/%{name}-%{version}.tar.bz2
+# Source0-md5:	100f6b4369d542286ed67faa16112662
 URL:		http://www.dc.ds.pg.gda.pl/
 BuildRequires:	autoconf >= 2.52
 BuildRequires:	automake
@@ -87,9 +87,13 @@ mv -f /etc/dcd/dcd.conf.tmp /etc/dcd/dcd.conf
 echo "Upgrading from version < 0.4.6"
 sed -i -e 's/minimum_sleep_time\b/minimal_sleep_time/' /etc/dcd/dcd.conf
 
+%triggerpostun -- dcd < 0.4.9
+echo "Upgrading from version < 0.4.9"
+sed -i -e 's/ping_timeout/idle_timeout/' /etc/dcd/dcd.conf
+
 %files
 %defattr(644,root,root,755)
-%doc AUTHORS BUGS FAQ NEWS README TODO doc/*.html
+%doc AUTHORS BUGS FAQ NEWS README TODO
 %attr(755,daemon,root) %dir %{_sysconfdir}/dcd
 %attr(660,root,daemon) %config(noreplace) %{_sysconfdir}/dcd/console.allow
 %attr(660,root,daemon) %config(noreplace) %{_sysconfdir}/dcd/dcd.users
