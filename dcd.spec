@@ -1,13 +1,12 @@
 Summary:	DConnect Daemon - Hub D****ct Connect for Linux
 Summary(pl):	DConnect Daemon - Hub D****ct Connecta dla Linuksa
 Name:		dcd
-Version:	0.1.0
-Release:	3
+Version:	0.1.4
+Release:	1
 License:	GPL v2
 Group:		Networking/Daemons
 Vendor:		DConnect Team <dc-hub@ds.pg.gda.pl>
 Source0:	ftp://pollux.ds.pg.gda.pl/pub/Linux/DConnect/sources/stable/%{name}-%{version}.tar.bz2
-Patch0:		%{name}-MyINFO_sig11_fix.patch
 URL:		http://www.dc.ds.pg.gda.pl/
 BuildRequires:	autoconf
 BuildRequires:	automake
@@ -26,7 +25,6 @@ pracuje jako demon i u¿ywa w±tków.
 
 %prep
 %setup -q
-%patch0 -p1
 
 %build
 rm -f missing
@@ -41,14 +39,14 @@ rm -f missing
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT{%{_sysconfdir}/{sysconfig,rc.d/init.d},/var/log}
+install -d $RPM_BUILD_ROOT{%{_sysconfdir}/{sysconfig,rc.d/init.d},/var/log/dcd}
 
 %{__make} install DESTDIR=$RPM_BUILD_ROOT
 
 install contrib/PLD/dcd.init $RPM_BUILD_ROOT%{_sysconfdir}/rc.d/init.d/dcd
 install contrib/dcd.sysconfig $RPM_BUILD_ROOT%{_sysconfdir}/sysconfig/dcd
 
-touch $RPM_BUILD_ROOT/var/log/dcd.log
+touch $RPM_BUILD_ROOT/var/log/dcd/dcd.log
 %clean
 rm -rf $RPM_BUILD_ROOT
 
@@ -71,8 +69,8 @@ fi
 %files
 %defattr(644,root,root,755)
 %doc AUTHORS BUGS FAQ NEWS README TODO doc/*.txt doc/*.html
-%config(noreplace) %{_sysconfdir}/dcd/dchub.conf
+%config(noreplace) %{_sysconfdir}/dcd/dcd.conf
 %config(noreplace) %{_sysconfdir}/sysconfig/dcd
 %attr(755,root,root) %{_sbindir}/dcd
 %attr(754,root,root) %{_sysconfdir}/rc.d/init.d/dcd
-%attr(644,daemon,root) /var/log/dcd.log
+%attr(644,daemon,root) /var/log/dcd/dcd.log
