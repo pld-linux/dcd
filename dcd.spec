@@ -1,7 +1,7 @@
 Summary:	DConnect Daemon - Hub D****ct Connect for Linux
 Summary(pl):	DConnect Daemon - Hub D****ct Connecta dla Linuksa
 Name:		dcd
-Version:	0.0.5
+Version:	0.0.6
 Release:	1
 License:	GPL v2
 Group:		Networking/Daemons
