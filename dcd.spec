@@ -1,18 +1,17 @@
 Summary:	DConnect Daemon - Hub D****ct Connect for Linux
 Summary(pl):	DConnect Daemon - Hub D****ct Connecta dla Linuksa
 Name:		dcd
-Version:	0.1.6
+Version:	0.1.7
 Release:	1
 License:	GPL v2
 Group:		Networking/Daemons
 Vendor:		DConnect Team <dc-hub@ds.pg.gda.pl>
 Source0:	ftp://pollux.ds.pg.gda.pl/pub/Linux/DConnect/sources/devel/%{name}-%{version}.tar.bz2
 URL:		http://www.dc.ds.pg.gda.pl/
-BuildRequires:	autoconf
+BuildRequires:	autoconf >= 2.52
 BuildRequires:	automake
 BuildRequires:	libtool
 BuildRequires:	libwrap-devel
-BuildRequires:	lwl-devel >= 0.9
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -33,18 +32,20 @@ rm -f missing
 %{__autoconf}
 %{__automake}
 %configure \
-	--sysconfdir=%{_sysconfdir}/dcd
+	--sysconfdir=%{_sysconfdir}/dcd \
+	--with-user=daemon \
+	--with-group=daemon
 
 %{__make}
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT{%{_sysconfdir}/{sysconfig,rc.d/init.d},/var/log/dcd}
+install -d $RPM_BUILD_ROOT%{_sysconfdir}/{sysconfig,rc.d/init.d}
 
 %{__make} install DESTDIR=$RPM_BUILD_ROOT
 
-install contrib/PLD/dcd.init $RPM_BUILD_ROOT/etc/rc.d/init.d/dcd
-install contrib/dcd.sysconfig $RPM_BUILD_ROOT/etc/sysconfig/dcd
+install contrib/PLD/dcd.init $RPM_BUILD_ROOT%{_sysconfdir}/rc.d/init.d/dcd
+install contrib/dcd.sysconfig $RPM_BUILD_ROOT%{_sysconfdir}/sysconfig/dcd
 
 touch $RPM_BUILD_ROOT/var/log/dcd/dcd.log
 %clean
@@ -66,15 +67,25 @@ if [ "$1" = "0" ]; then
         /sbin/chkconfig --del dcd
 fi
 
+#%triggerpostun -- dcd < 0.1.1
+#echo "Upgrading from version < 0.1.1"
+#echo "Remember to review config - the options were changed!!!"
+#if [ -e /etc/dcd/dchub.conf.rpmsave ]; then
+#	cp /etc/dcd/dchub.conf.rpmsave /etc/dcd/dcd.conf
+#fi
+
 %files
 %defattr(644,root,root,755)
 %doc AUTHORS BUGS FAQ NEWS README TODO doc/*.txt doc/*.html
 %attr(751,daemon,root) %dir %{_sysconfdir}/dcd
-%attr(640,daemon,root) %config(noreplace) %{_sysconfdir}/dcd/passwd
-%attr(644,daemon,root) %config(noreplace) %{_sysconfdir}/dcd/dcd.conf
-%attr(644,daemon,root) %config(noreplace) %{_sysconfdir}/dcd/welcome
-%attr(644,daemon,root) %config(noreplace) %{_sysconfdir}/dcd/motd
-%config(noreplace) /etc/sysconfig/dcd
+%attr(640,root,daemon) %config(noreplace) %{_sysconfdir}/dcd/console.allow
+%attr(640,root,daemon) %config(noreplace) %{_sysconfdir}/dcd/console.users
+%attr(640,daemon,daemon) %config(noreplace) %{_sysconfdir}/dcd/dcd.banned
+%attr(644,root,daemon) %config(noreplace) %{_sysconfdir}/dcd/dcd.conf
+%attr(644,root,daemon) %config(noreplace) %{_sysconfdir}/dcd/dcd.motd
+%attr(644,root,daemon) %config(noreplace) %{_sysconfdir}/dcd/dcd.welcome
+%attr(644,daemon,daemon) %config(noreplace) %{_sysconfdir}/dcd/nicks.allow
+%config(noreplace) %{_sysconfdir}/sysconfig/dcd
 %attr(755,root,root) %{_sbindir}/dcd
-%attr(754,root,root) /etc/rc.d/init.d/dcd
+%attr(754,root,root) %{_sysconfdir}/rc.d/init.d/dcd
 %attr(644,daemon,root) /var/log/dcd/dcd.log
