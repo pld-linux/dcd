@@ -1,7 +1,7 @@
 Summary:	DConnect Daemon - Hub D****ct Connect for Linux
 Summary(pl):	DConnect Daemon - Hub D****ct Connecta dla Linuksa
 Name:		dcd
-Version:	0.1.8
+Version:	0.2.1
 Release:	1
 License:	GPL v2
 Group:		Networking/Daemons
@@ -40,14 +40,14 @@ rm -f missing
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT%{_sysconfdir}/{sysconfig,rc.d/init.d}
+install -d $RPM_BUILD_ROOT{%{_sysconfdir}/{sysconfig,rc.d/init.d,logrotate.d},/var/log/archiv/dcd}
 
 %{__make} install DESTDIR=$RPM_BUILD_ROOT
 
 install contrib/PLD/dcd.init $RPM_BUILD_ROOT%{_sysconfdir}/rc.d/init.d/dcd
 install contrib/dcd.sysconfig $RPM_BUILD_ROOT%{_sysconfdir}/sysconfig/dcd
+install contrib/logrotate.dcd $RPM_BUILD_ROOT%{_sysconfdir}/logrotate.d/dcd
 
-touch $RPM_BUILD_ROOT/var/log/dcd/dcd.log
 %clean
 rm -rf $RPM_BUILD_ROOT
 
@@ -76,16 +76,20 @@ fi
 
 %files
 %defattr(644,root,root,755)
-%doc AUTHORS BUGS FAQ NEWS README TODO doc/*.txt doc/*.html
-%attr(751,daemon,root) %dir %{_sysconfdir}/dcd
-%attr(640,root,daemon) %config(noreplace) %{_sysconfdir}/dcd/console.allow
-%attr(640,root,daemon) %config(noreplace) %{_sysconfdir}/dcd/console.users
-%attr(640,daemon,daemon) %config(noreplace) %{_sysconfdir}/dcd/dcd.banned
-%attr(644,root,daemon) %config(noreplace) %{_sysconfdir}/dcd/dcd.conf
-%attr(644,root,daemon) %config(noreplace) %{_sysconfdir}/dcd/dcd.motd
-%attr(644,root,daemon) %config(noreplace) %{_sysconfdir}/dcd/dcd.welcome
-%attr(644,daemon,daemon) %config(noreplace) %{_sysconfdir}/dcd/nicks.allow
+%doc AUTHORS BUGS FAQ NEWS README TODO doc/*.html
+%attr(755,daemon,root) %dir %{_sysconfdir}/dcd
+%attr(660,root,daemon) %config(noreplace) %{_sysconfdir}/dcd/console.allow
+%attr(660,root,daemon) %config(noreplace) %{_sysconfdir}/dcd/console.users
+%attr(660,daemon,daemon) %config(noreplace) %{_sysconfdir}/dcd/dcd.banned
+%attr(664,root,daemon) %config(noreplace) %{_sysconfdir}/dcd/dcd.conf
+%attr(664,root,daemon) %config(noreplace) %{_sysconfdir}/dcd/dcd.motd
+%attr(664,root,daemon) %config(noreplace) %{_sysconfdir}/dcd/dcd.welcome
+%attr(664,daemon,daemon) %config(noreplace) %{_sysconfdir}/dcd/nicks.allow
 %config(noreplace) %{_sysconfdir}/sysconfig/dcd
+%config(noreplace) %{_sysconfdir}/logrotate.d/dcd
 %attr(755,root,root) %{_sbindir}/dcd
 %attr(754,root,root) %{_sysconfdir}/rc.d/init.d/dcd
-%attr(644,daemon,root) /var/log/dcd/dcd.log
+%attr(751,daemon,root) %dir /var/log/dcd
+%attr(751,daemon,root) %dir /var/log/archiv/dcd
+%{_mandir}/man1/*.1*
+%{_mandir}/man2/*.2*
