@@ -12,11 +12,11 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
 This is Linux D*** Connect Hub implementation for Linux. It works in
-daemon mode.
+daemon mode and utilizes threads.
 
 %description -l pl
 Pakiet zawiera Linuksow± implementacjê huba D*** Connecta, który
-pracuje jako demon.
+pracuje jako demon i u¿ywa w±tków.
 
 %prep
 %setup -q
