@@ -57,17 +57,17 @@ rm -rf $RPM_BUILD_ROOT
 %post
 /sbin/chkconfig --add dcd
 if [ -f /var/lock/subsys/dcd ]; then
-        /etc/rc.d/init.d/dcd restart 1>&2
+	/etc/rc.d/init.d/dcd restart 1>&2
 else
-        echo "Run \"/etc/rc.d/init.d/dcd start\" to start DConnect Daemon."
+	echo "Run \"/etc/rc.d/init.d/dcd start\" to start DConnect Daemon."
 fi
 
 %preun
 if [ "$1" = "0" ]; then
-        if [ -f /var/lock/subsys/dcd ]; then
-                /etc/rc.d/init.d/dcd stop 1>&2
-        fi
-        /sbin/chkconfig --del dcd
+	if [ -f /var/lock/subsys/dcd ]; then
+		/etc/rc.d/init.d/dcd stop 1>&2
+	fi
+	/sbin/chkconfig --del dcd
 fi
 
 #%triggerpostun -- dcd < 0.1.1
