@@ -5,6 +5,7 @@ Version:	0.1.0
 Release:	1
 License:	GPL v2
 Group:		Networking/Daemons
+Vendor:		DConnect Team <dc-hub@ds.pg.gda.pl>
 Source0:	ftp://pollux.ds.pg.gda.pl/pub/Linux/DConnect/sources/stable/%{name}-%{version}.tar.bz2
 URL:		http://www.dc.ds.pg.gda.pl/
 BuildRequires:	autoconf
