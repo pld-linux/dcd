@@ -1,8 +1,8 @@
 Summary:	DConnect Daemon - Hub D****ct Connect for Linux
 Summary(pl):	DConnect Daemon - Hub D****ct Connecta dla Linuksa
 Name:		dcd
-Version:	0.0.6
-Release:	1
+Version:	0.0.7
+Release:	1	
 License:	GPL v2
 Group:		Networking/Daemons
 Source0:	ftp://pollux.ds.pg.gda.pl/pub/Linux/DConnect/sources/stable/%{name}-%{version}.tar.gz
@@ -11,6 +11,7 @@ BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	libtool
 BuildRequires:	libwrap-devel
+BuildRequires:	lwl-devel
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -37,13 +38,14 @@ aclocal
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT%{_sysconfdir}/{sysconfig,rc.d/init.d}
+install -d $RPM_BUILD_ROOT{%{_sysconfdir}/{sysconfig,rc.d/init.d},/var/log}
 
 %{__make} install DESTDIR=$RPM_BUILD_ROOT
 
 install contrib/PLD/dcd.init $RPM_BUILD_ROOT%{_sysconfdir}/rc.d/init.d/dcd
 install contrib/dcd.sysconfig $RPM_BUILD_ROOT%{_sysconfdir}/sysconfig/dcd
 
+touch $RPM_BUILD_ROOT/var/log/dcd.log
 %clean
 rm -rf $RPM_BUILD_ROOT
 
@@ -65,8 +67,9 @@ fi
 
 %files
 %defattr(644,root,root,755)
-%doc README BUGS AUTHORS NEWS TODO doc/*.txt doc/*.html
+%doc AUTHORS BUGS FAQ NEWS README TODO doc/*.txt doc/*.html
 %config(noreplace) %{_sysconfdir}/dcd/dchub.conf
 %config(noreplace) %{_sysconfdir}/sysconfig/dcd
 %attr(755,root,root) %{_sbindir}/dcd
 %attr(754,root,root) %{_sysconfdir}/rc.d/init.d/dcd
+%attr(644,daemon,root) /var/log/dcd.log
