@@ -22,7 +22,7 @@ This is Linux D*** Connect Hub implementation for Linux. It works in
 daemon mode and utilizes threads.
 
 %description -l pl
-Pakiet zawiera Linuksow± implementacjê huba D*** Connecta, który
+Pakiet zawiera linuksow± implementacjê huba D*** Connecta, który
 pracuje jako demon i u¿ywa w±tków.
 
 %prep
