@@ -43,8 +43,8 @@ install -d $RPM_BUILD_ROOT{%{_sysconfdir}/{sysconfig,rc.d/init.d},/var/log/dcd}
 
 %{__make} install DESTDIR=$RPM_BUILD_ROOT
 
-install contrib/PLD/dcd.init $RPM_BUILD_ROOT%{_sysconfdir}/rc.d/init.d/dcd
-install contrib/dcd.sysconfig $RPM_BUILD_ROOT%{_sysconfdir}/sysconfig/dcd
+install contrib/PLD/dcd.init $RPM_BUILD_ROOT/etc/rc.d/init.d/dcd
+install contrib/dcd.sysconfig $RPM_BUILD_ROOT/etc/sysconfig/dcd
 
 touch $RPM_BUILD_ROOT/var/log/dcd/dcd.log
 %clean
@@ -70,7 +70,7 @@ fi
 %defattr(644,root,root,755)
 %doc AUTHORS BUGS FAQ NEWS README TODO doc/*.txt doc/*.html
 %config(noreplace) %{_sysconfdir}/dcd/dcd.conf
-%config(noreplace) %{_sysconfdir}/sysconfig/dcd
+%config(noreplace) /etc/sysconfig/dcd
 %attr(755,root,root) %{_sbindir}/dcd
-%attr(754,root,root) %{_sysconfdir}/rc.d/init.d/dcd
+%attr(754,root,root) /etc/rc.d/init.d/dcd
 %attr(644,daemon,root) /var/log/dcd/dcd.log
