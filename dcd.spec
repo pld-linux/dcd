@@ -2,7 +2,7 @@ Summary:	DConnect Daemon - Hub D****ct Connect for Linux
 Summary(pl):	DConnect Daemon - Hub D****ct Connecta dla Linuksa
 Name:		dcd
 Version:	0.4.7
-Release:	0.2
+Release:	1
 License:	GPL v2
 Group:		Networking/Daemons
 Vendor:		DConnect Team <dc-hub@ds.pg.gda.pl>
@@ -85,10 +85,8 @@ mv -f /etc/dcd/dcd.conf.tmp /etc/dcd/dcd.conf
 
 %triggerpostun -- dcd < 0.4.6
 echo "Upgrading from version < 0.4.6"
-if [ -e /etc/dcd/dcd.conf ]; then
-	cp /etc/dcd/dcd.conf /etc/dcd/dcd.conf.save
-	sed -i -e 's/minimum_sleep_time\b/minimal_sleep_time/' /etc/dcd/dcd.conf
-fi	
+cp /etc/dcd/dcd.conf /etc/dcd/dcd.conf.save
+sed -i -e 's/minimum_sleep_time\b/minimal_sleep_time/' /etc/dcd/dcd.conf
 
 %files
 %defattr(644,root,root,755)
