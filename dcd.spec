@@ -5,8 +5,8 @@ Version:	0.0.2
 Release:	1
 License:	GPL v2
 Group:		Networking/Daemons
-Source0:	http://piorun.ds.pg.gda.pl/~blues/%{name}-%{version}.tar.gz
-URL:		http://piorun.ds.pg.gda.pl/~blues/
+Source0:	ftp://pollux.ds.pg.gda.pl/Linux/DConnect/sources/stable/%{name}-%{version}.tar.gz
+URL:		http://www.dc.ds.pg.gda.pl/
 BuildRequires:	libwrap-devel
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
