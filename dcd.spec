@@ -69,7 +69,11 @@ fi
 %files
 %defattr(644,root,root,755)
 %doc AUTHORS BUGS FAQ NEWS README TODO doc/*.txt doc/*.html
-%config(noreplace) %{_sysconfdir}/dcd/*
+%attr(751,daemon,root) %dir %{_sysconfdir}/dcd
+%attr(640,daemon,root) %config(noreplace) %{_sysconfdir}/dcd/passwd
+%attr(644,daemon,root) %config(noreplace) %{_sysconfdir}/dcd/dcd.conf
+%attr(644,daemon,root) %config(noreplace) %{_sysconfdir}/dcd/welcome
+%attr(644,daemon,root) %config(noreplace) %{_sysconfdir}/dcd/motd
 %config(noreplace) /etc/sysconfig/dcd
 %attr(755,root,root) %{_sbindir}/dcd
 %attr(754,root,root) /etc/rc.d/init.d/dcd
