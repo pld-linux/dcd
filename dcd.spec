@@ -27,7 +27,7 @@ pracuje jako demon i u¿ywa w±tków.
 %patch0 -p1
 
 %build
-rm -f missinf
+rm -f missing
 libtoolize --copy --force
 aclocal
 autoconf
