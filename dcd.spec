@@ -1,12 +1,11 @@
 Summary:	DConnect Daemon - Hub D****ct Connect for Linux
 Summary(pl):	DConnect Daemon - Hub D****ct Connecta dla Linuksa
 Name:		dcd
-Version:	0.0.2
+Version:	0.0.3
 Release:	1
 License:	GPL v2
 Group:		Networking/Daemons
 Source0:	ftp://pollux.ds.pg.gda.pl/Linux/DConnect/sources/stable/%{name}-%{version}.tar.gz
-Patch0:		%{name}-ac_fixes.patch
 URL:		http://www.dc.ds.pg.gda.pl/
 BuildRequires:	autoconf
 BuildRequires:	automake
@@ -24,7 +23,6 @@ pracuje jako demon i u¿ywa w±tków.
 
 %prep
 %setup -q
-%patch0 -p1
 
 %build
 rm -f missing
