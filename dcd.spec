@@ -85,7 +85,6 @@ mv -f /etc/dcd/dcd.conf.tmp /etc/dcd/dcd.conf
 
 %triggerpostun -- dcd < 0.4.6
 echo "Upgrading from version < 0.4.6"
-cp /etc/dcd/dcd.conf /etc/dcd/dcd.conf.save
 sed -i -e 's/minimum_sleep_time\b/minimal_sleep_time/' /etc/dcd/dcd.conf
 
 %files
