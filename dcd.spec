@@ -43,14 +43,14 @@ pracuje jako demon i u¿ywa w±tków.
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT{%{_sysconfdir}/{sysconfig,rc.d/init.d,logrotate.d},/var/log/archiv/dcd}
+install -d $RPM_BUILD_ROOT{/etc/{sysconfig,rc.d/init.d,logrotate.d},/var/log/archiv/dcd}
 
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
 
-install contrib/PLD/dcd.init $RPM_BUILD_ROOT%{_sysconfdir}/rc.d/init.d/dcd
-install contrib/dcd.sysconfig $RPM_BUILD_ROOT%{_sysconfdir}/sysconfig/dcd
-install contrib/logrotate.dcd $RPM_BUILD_ROOT%{_sysconfdir}/logrotate.d/dcd
+install contrib/PLD/dcd.init $RPM_BUILD_ROOT/etc/rc.d/init.d/dcd
+install contrib/dcd.sysconfig $RPM_BUILD_ROOT/etc/sysconfig/dcd
+install contrib/logrotate.dcd $RPM_BUILD_ROOT/etc/logrotate.d/dcd
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -103,10 +103,10 @@ sed -i -e 's/ping_timeout/idle_timeout/' /etc/dcd/dcd.conf
 %attr(664,root,daemon) %config(noreplace) %{_sysconfdir}/dcd/dcd.motd
 %attr(664,root,daemon) %config(noreplace) %{_sysconfdir}/dcd/dcd.welcome
 %attr(664,daemon,daemon) %config(noreplace) %{_sysconfdir}/dcd/nicks.allow
-%config(noreplace) %{_sysconfdir}/sysconfig/dcd
-%config(noreplace) %{_sysconfdir}/logrotate.d/dcd
+%config(noreplace) /etc/sysconfig/dcd
+%config(noreplace) /etc/logrotate.d/dcd
 %attr(755,root,root) %{_sbindir}/dcd
-%attr(754,root,root) %{_sysconfdir}/rc.d/init.d/dcd
+%attr(754,root,root) /etc/rc.d/init.d/dcd
 %attr(751,daemon,root) %dir /var/log/dcd
 %attr(751,daemon,root) %dir /var/log/archiv/dcd
 %{_mandir}/man1/*.1*
