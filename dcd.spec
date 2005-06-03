@@ -1,13 +1,13 @@
 Summary:	DConnect Daemon - Hub D****ct Connect for Linux
 Summary(pl):	DConnect Daemon - Hub D****ct Connecta dla Linuksa
 Name:		dcd
-Version:	0.5.3
+Version:	0.5.4
 Release:	1
 License:	GPL v2
 Group:		Networking/Daemons
 Vendor:		DConnect Team <dc-hub@ds.pg.gda.pl>
 Source0:	ftp://pollux.ds.pg.gda.pl/pub/Linux/DConnect/sources/devel/%{name}-%{version}.tar.bz2
-# Source0-md5:	388f81bfb80fc43f610f119ef39de92b
+# Source0-md5:	90ec9ae64102e55424982cb26b8f0f73
 URL:		http://www.dc.ds.pg.gda.pl/
 BuildRequires:	autoconf >= 2.52
 BuildRequires:	automake
@@ -90,6 +90,10 @@ sed -i -e 's/minimum_sleep_time\b/minimal_sleep_time/' /etc/dcd/dcd.conf
 %triggerpostun -- dcd < 0.4.9
 echo "Upgrading from version < 0.4.9"
 sed -i -e 's/ping_timeout/idle_timeout/' /etc/dcd/dcd.conf
+
+%triggerpostun -- dcd < 0.5.5
+echo "Upgrading from version < 0.5.5"
+sed -i -e 's/listen_interface/bind_address/' /etc/dcd/dcd.conf
 
 %files
 %defattr(644,root,root,755)
