@@ -1,13 +1,13 @@
 Summary:	DConnect Daemon - Hub D****ct Connect for Linux
 Summary(pl):	DConnect Daemon - Hub D****ct Connecta dla Linuksa
 Name:		dcd
-Version:	0.5.4
+Version:	0.5.5
 Release:	1
 License:	GPL v2
 Group:		Networking/Daemons
 Vendor:		DConnect Team <dc-hub@ds.pg.gda.pl>
 Source0:	ftp://pollux.ds.pg.gda.pl/pub/Linux/DConnect/sources/devel/%{name}-%{version}.tar.bz2
-# Source0-md5:	90ec9ae64102e55424982cb26b8f0f73
+# Source0-md5:	6f3712ce4fd4a88e31ff3d0979d9dba7
 URL:		http://www.dc.ds.pg.gda.pl/
 BuildRequires:	autoconf >= 2.52
 BuildRequires:	automake
@@ -107,9 +107,11 @@ sed -i -e 's/listen_interface/bind_address/' /etc/dcd/dcd.conf
 %attr(664,root,daemon) %config(noreplace) %{_sysconfdir}/dcd/dcd.motd
 %attr(664,root,daemon) %config(noreplace) %{_sysconfdir}/dcd/dcd.welcome
 %attr(664,daemon,daemon) %config(noreplace) %{_sysconfdir}/dcd/nicks.allow
+%attr(664,daemon,daemon) %config(noreplace) %{_sysconfdir}/dcd/dcd.rules
 %config(noreplace) /etc/sysconfig/dcd
 %config(noreplace) /etc/logrotate.d/dcd
 %attr(755,root,root) %{_sbindir}/dcd
+%attr(755,root,root) %{_sbindir}/dcd.adduser
 %attr(754,root,root) /etc/rc.d/init.d/dcd
 %attr(751,daemon,root) %dir /var/log/dcd
 %attr(751,daemon,root) %dir /var/log/archiv/dcd
