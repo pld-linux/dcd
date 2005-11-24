@@ -13,9 +13,9 @@ BuildRequires:	autoconf >= 2.52
 BuildRequires:	automake
 BuildRequires:	libtool
 BuildRequires:	libwrap-devel
-Requires:	rc-scripts
-Requires:	sed >= 4.0
 Requires(post,preun):	/sbin/chkconfig
+Requires(triggerpostun):	sed >= 4.0
+Requires:	rc-scripts
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -80,8 +80,7 @@ fi
 umask 002
 echo "Remember to review config - console users has been changed into dcd.users"
 cp /etc/dcd/dcd.conf /etc/dcd/dcd.conf.rpmsave
-sed -e s/console.users/dcd.users/g /etc/dcd/dcd.conf >/etc/dcd/dcd.conf.tmp
-mv -f /etc/dcd/dcd.conf.tmp /etc/dcd/dcd.conf
+sed -i -e 's/console.users/dcd.users/g' /etc/dcd/dcd.conf
 
 %triggerpostun -- dcd < 0.4.6
 echo "Upgrading from version < 0.4.6"
