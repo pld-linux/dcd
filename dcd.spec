@@ -13,8 +13,8 @@ BuildRequires:	autoconf >= 2.52
 BuildRequires:	automake
 BuildRequires:	libtool
 BuildRequires:	libwrap-devel
-PreReq:		rc-scripts
-PreReq:		sed >= 4.0
+Requires:	rc-scripts
+Requires:	sed >= 4.0
 Requires(post,preun):	/sbin/chkconfig
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
