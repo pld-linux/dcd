@@ -5,7 +5,6 @@ Version:	0.6.1
 Release:	1
 License:	GPL v2
 Group:		Networking/Daemons
-Vendor:		DConnect Team <dc-hub@ds.pg.gda.pl>
 Source0:	ftp://pollux.ds.pg.gda.pl/pub/Linux/DConnect/sources/stable/%{name}-%{version}.tar.bz2
 # Source0-md5:	35cc5d427004a3aa5ff46427f3b59a6a
 URL:		http://www.dc.ds.pg.gda.pl/
@@ -13,6 +12,7 @@ BuildRequires:	autoconf >= 2.52
 BuildRequires:	automake
 BuildRequires:	libtool
 BuildRequires:	libwrap-devel
+BuildRequires:	rpmbuild(macros) >= 1.268
 Requires(post,preun):	/sbin/chkconfig
 Requires(triggerpostun):	sed >= 4.0
 Requires:	rc-scripts
@@ -57,17 +57,11 @@ rm -rf $RPM_BUILD_ROOT
 
 %post
 /sbin/chkconfig --add dcd
-if [ -f /var/lock/subsys/dcd ]; then
-	/etc/rc.d/init.d/dcd restart 1>&2
-else
-	echo "Run \"/etc/rc.d/init.d/dcd start\" to start DConnect Daemon."
-fi
+%service dcd restart "DConnect Daemon"
 
 %preun
 if [ "$1" = "0" ]; then
-	if [ -f /var/lock/subsys/dcd ]; then
-		/etc/rc.d/init.d/dcd stop 1>&2
-	fi
+	%service dcd stop
 	/sbin/chkconfig --del dcd
 fi
 
@@ -107,7 +101,7 @@ sed -i -e 's/listen_interface/bind_address/' /etc/dcd/dcd.conf
 %attr(664,root,daemon) %config(noreplace) %{_sysconfdir}/dcd/dcd.welcome
 %attr(664,daemon,daemon) %config(noreplace) %{_sysconfdir}/dcd/nicks.allow
 %attr(664,daemon,daemon) %config(noreplace) %{_sysconfdir}/dcd/dcd.rules
-%config(noreplace) /etc/sysconfig/dcd
+%config(noreplace) %verify(not md5 mtime size) /etc/sysconfig/dcd
 %config(noreplace) /etc/logrotate.d/dcd
 %attr(755,root,root) %{_sbindir}/dcd
 %attr(755,root,root) %{_sbindir}/dcd.adduser
