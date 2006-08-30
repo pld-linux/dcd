@@ -1,12 +1,12 @@
 Summary:	DConnect Daemon - Hub D****ct Connect for Linux
 Summary(pl):	DConnect Daemon - Hub D****ct Connecta dla Linuksa
 Name:		dcd
-Version:	0.7.1
+Version:	0.9.0
 Release:	1
 License:	GPL v2
 Group:		Networking/Daemons
-Source0:	ftp://pollux.ds.pg.gda.pl/pub/Linux/DConnect/sources/stable/%{name}-%{version}.tar.bz2
-# Source0-md5:	186afab6c7cba46d2175a97c6a64789b
+Source0:	ftp://pollux.ds.pg.gda.pl/pub/Linux/DConnect/sources/devel/%{name}-%{version}.tar.bz2
+# Source0-md5:	1a3e85575c84b5bd00dc65ae372ad9f9
 URL:		http://www.dc.ds.pg.gda.pl/
 BuildRequires:	autoconf >= 2.52
 BuildRequires:	automake
@@ -90,17 +90,19 @@ sed -i -e 's/listen_interface/bind_address/' /etc/dcd/dcd.conf
 
 %files
 %defattr(644,root,root,755)
-%doc AUTHORS BUGS FAQ NEWS README TODO
+%doc AUTHORS BUGS FAQ NEWS README TODO conf/*.txt
 %attr(755,daemon,root) %dir %{_sysconfdir}/dcd
 %attr(660,root,daemon) %config(noreplace) %{_sysconfdir}/dcd/console.allow
 %attr(660,root,daemon) %config(noreplace) %{_sysconfdir}/dcd/dcd.users
-%attr(660,daemon,daemon) %config(noreplace) %{_sysconfdir}/dcd/dcd.banned
-%attr(664,daemon,daemon) %config(noreplace) %{_sysconfdir}/dcd/dcd.penalties
+%attr(660,root,daemon) %config(noreplace) %{_sysconfdir}/dcd/dcd.banned
+%attr(660,root,daemon) %config(noreplace) %{_sysconfdir}/dcd/dcd.hublinks
+%attr(660,root,daemon) %config(noreplace) %{_sysconfdir}/dcd/dcd.usercommands
+%attr(664,root,daemon) %config(noreplace) %{_sysconfdir}/dcd/dcd.penalties
 %attr(664,root,daemon) %config(noreplace) %{_sysconfdir}/dcd/dcd.conf
 %attr(664,root,daemon) %config(noreplace) %{_sysconfdir}/dcd/dcd.motd
 %attr(664,root,daemon) %config(noreplace) %{_sysconfdir}/dcd/dcd.welcome
-%attr(664,daemon,daemon) %config(noreplace) %{_sysconfdir}/dcd/nicks.allow
-%attr(664,daemon,daemon) %config(noreplace) %{_sysconfdir}/dcd/dcd.rules
+%attr(664,root,daemon) %config(noreplace) %{_sysconfdir}/dcd/nicks.allow
+%attr(664,root,daemon) %config(noreplace) %{_sysconfdir}/dcd/dcd.rules
 %config(noreplace) %verify(not md5 mtime size) /etc/sysconfig/dcd
 %config(noreplace) /etc/logrotate.d/dcd
 %attr(755,root,root) %{_sbindir}/dcd
