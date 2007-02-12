@@ -1,5 +1,5 @@
 Summary:	DConnect Daemon - Hub D****ct Connect for Linux
-Summary(pl.UTF-8):   DConnect Daemon - Hub D****ct Connecta dla Linuksa
+Summary(pl.UTF-8):	DConnect Daemon - Hub D****ct Connecta dla Linuksa
 Name:		dcd
 Version:	1.0.1
 Release:	1
