@@ -43,7 +43,7 @@ pracuje jako demon i używa wątków.
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT{/etc/{sysconfig,rc.d/init.d,logrotate.d},/var/log/archiv/dcd}
+install -d $RPM_BUILD_ROOT{/etc/{sysconfig,rc.d/init.d,logrotate.d},/var/log/archive/dcd}
 
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
@@ -109,6 +109,6 @@ sed -i -e 's/listen_interface/bind_address/' /etc/dcd/dcd.conf
 %attr(755,root,root) %{_sbindir}/dcd.adduser
 %attr(754,root,root) /etc/rc.d/init.d/dcd
 %attr(751,daemon,root) %dir /var/log/dcd
-%attr(751,daemon,root) %dir /var/log/archiv/dcd
+%attr(751,daemon,root) %dir /var/log/archive/dcd
 %{_mandir}/man1/*.1*
 %{_mandir}/man2/*.2*
